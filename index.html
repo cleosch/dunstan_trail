@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+    name="viewport"
+    content="initial-scale=1,maximum-scale=1,user-scalable=no"
+  />
+    <title>Hike map - Te Araroa o te Paparoa</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@arcgis/core@4.19.1/assets/esri/themes/light/main.css" />
+  </head>
+  <body>
+    <!--Main map goes in the *BODY*-->
+    <div id="viewDiv"></div>
+    
+    <div class="main">
+      <div class="title">
+        <h3>Te Ara o te Paparoa</h3>
+      </div>
+      <div class="sections">
+        <div class="section">
+          <h4>How to get there?</h4>
+          <p>Punakaiki is a 4 hour drive from Christchurch. From <button class="viewpointBtn blue" data-value="christchurch">Christchurch</button> you'll take four hours to the track start in <button class="viewpointBtn blue" data-value="punakaiki">Punakaiki</button>.</p>
+          <!--Mini overview map goes here-->
+          <div id="miniMap"></div>
+        </div>
+        <div class="section">
+          <h4>How difficult is it?</h4>
+          <p>It is a medium difficulty hike which takes around x hours both ways. You can start either in Blackball or Punakaiki </p>
+          <!--Track elevation profile goes here goes here-->
+          <div id="profile"></div>
+          <p>There are three huts along the track <button class="viewpointBtn brown" data-value="porarari">Porarari Hut</button>, <button class="viewpointBtn brown" data-value="moonlight">Moonlight Tops Hut</button> and <button class="viewpointBtn brown" data-value="ces_clarke">Ces Clarke Hut</button></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
