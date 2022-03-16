@@ -51,34 +51,24 @@ new MapView({
   }
 });
 
-const citiesLayer = new FeatureLayer({
-  url: "https://services8.arcgis.com/AYGZtmUtpARUKBlB/arcgis/rest/services/Te_Reo_M%C4%81ori_Place_Names/FeatureServer",
-  definitionExpression: "name IN ('Christchurch', 'Kaikoura', 'Greymouth', 'Hokitika', 'Punakaiki')",
-  renderer: {
-    type: "unique-value",
-    field: "name_mi",
-    defaultSymbol: {
-      type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-      style: "circle",
-      color: [150, 150, 150],
-      size: "8px",  // pixels
-      outline: {
-        width: 0  // points
-      }
-    },
-  },
-  labelingInfo: [
-    new LabelClass({
-      labelExpressionInfo: { expression: "$feature.name_mi"},
-      labelPlacement: "above-center",
-      symbol: {
-        type: "text",
-        color: [100, 100, 100],
-        haloSize: 1,
-        haloColor: [255, 255, 255, 0.9]
-      }
-    })
-  ]
+
+
+const map = new ArcGISWebScene({
+  basemap: "satellite",
+  ground: "world-elevation"
 });
 
-miniMap.add(citiesLayer);
+const view = new SceneView({
+  map,
+  container: 'viewDiv',
+  qualityProfile: "high",
+  camera: {
+    position: [
+      7.66570611,
+      46.48383810,
+      3424.75347
+    ],
+    heading: 205.25,
+    tilt: 72.51
+  }
+});
