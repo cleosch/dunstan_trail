@@ -15,7 +15,15 @@ import FeatureLayer from "@arcgis/core/layers/FeatureLayer";
 import VectorTileLayer from "@arcgis/core/layers/VectorTileLayer";
 import TileLayer from "@arcgis/core/layers/TileLayer";
 import LabelClass from "@arcgis/core/layers/support/LabelClass";
-import { tcx } from "@tmcw/togeojson";
+import EsriMap from "esri/Map.js";
+import SceneView from "esri/views/SceneView.js";
+import ElevationProfile from "esri/widgets/ElevationProfile.js";
+import { LineSymbol3D, LineSymbol3DLayer, PointSymbol3D, IconSymbol3DLayer } from "esri/symbols.js";
+import { Polyline, Point } from "esri/geometry.js";
+import ElevationProfileLineInput from "esri/widgets/ElevationProfile/ElevationProfileLineInput.js";
+import Graphic from "esri/Graphic.js";
+import GraphicsLayer from "esri/layers/GraphicsLayer.js";
+import { gpx } from "https://unpkg.com/@tmcw/togeojson?module";
 import "./index.css";
 
 const map = new EsriMap({
