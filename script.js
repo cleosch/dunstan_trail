@@ -18,57 +18,79 @@ import LabelClass from "@arcgis/core/layers/support/LabelClass";
 import { tcx } from "@tmcw/togeojson";
 import "./index.css";
 
-const lightBlue = [129, 175, 214]
-const lightBrown = [161, 136, 119];
-const orange = [245, 173, 66];
-
-const miniMap = new ArcGISMap({
-  basemap: new Basemap({
-    baseLayers: [
-      new TileLayer({
-        portalItem: {
-          id: "1b243539f4514b6ba35e7d995890db1d" // world hillshade
-        },
-        opacity: 0.4
-      }),
-      new VectorTileLayer({
-        portalItem:{
-          id: "378fd91096fe478cb78a4e06b639b715"
-        },
-        blendMode: "multiply"
-     })
-    ]
-  })
-});
-
-new MapView({
-  container: "miniMap",
-  map: miniMap,
-  center: [172.68010648, -42.47741997],
-  zoom: 6,
-  ui: {
-    components: []
-  }
-});
-
-
-
-const map = new ArcGISWebScene({
+const map = new EsriMap({
   basemap: "satellite",
-  ground: "world-elevation"
+  ground: "world-elevation",
 });
 
 const view = new SceneView({
-  map,
-  container: 'viewDiv',
+  map: map,
+  container: "viewDiv",
   qualityProfile: "high",
   camera: {
     position: [
-      7.66570611,
-      46.48383810,
-      3424.75347
+      168.95148337,
+      -45.02154658,
+      15161.47986
     ],
-    heading: 205.25,
-    tilt: 72.51
+    heading: 310.62,
+    tilt: 57.89
+  },
+  environment: {
+    atmosphere: { quality: "high" },
+  },
+  ui: {
+    components: ["navigation-toggle"],
+  },
+  popup: {
+    defaultPopupTemplateEnabled: true
   }
 });
+
+const elevationProfile = new ElevationProfile({
+  view,
+  container: "profile",
+  profiles: [
+    new ElevationProfileLineInput({ color: [212, 42, 56], title: "Coronet Loop" }),
+  ],
+  visibleElements: {
+    selectButton: false,
+    sketchButton: false,
+    settingsButton: false,
+  },
+});
+
+(async () => {
+  // read the gpx file and convert it to geojson
+  const response = await fetch("./cycling.gpx");
+  const gpxcontent = await response.text();
+  const geojson = gpx(new DOMParser().parseFromString(gpxcontent, "text/xml"));
+  const coordinates = geojson.features[0].geometry.coordinates;
+
+  // add the track as an input for the ElevationProfile widget
+  const geometry = new Polyline({
+    paths: [coordinates],
+    hasZ: true
+  });
+  elevationProfile.input = new Graphic({ geometry: geometry });
+
+  // add the bike track layer as a graphics layer - like a template
+  const bikeTrackLayer = new GraphicsLayer({
+    elevationInfo: {
+      mode: "on-the-ground"
+    },
+    listMode: "hide"
+  });
+
+  const bikeTrack = new Graphic({
+    geometry: geometry,
+    symbol: new LineSymbol3D({
+      symbolLayers: [new LineSymbol3DLayer({
+        material: { color: [212, 42, 56] },
+        size: 3
+      })]
+    })
+  });
+  bikeTrackLayer.add(bikeTrack);
+  map.add(bikeTrackLayer);
+})();
