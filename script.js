@@ -12,7 +12,7 @@ import VectorTileLayer from "@arcgis/core/layers/VectorTileLayer";
 import TileLayer from "@arcgis/core/layers/TileLayer";
 import LabelClass from "@arcgis/core/layers/support/LabelClass";
 import { tcx } from "@tmcw/togeojson";
-import "./index.css";
+import "./style.css";
 
 const lightBlue = [129, 175, 214]
 const lightBrown = [161, 136, 119];

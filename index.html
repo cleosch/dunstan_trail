@@ -9,9 +9,16 @@
     <title>Hike map - Te Araroa o te Paparoa</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@arcgis/core@4.19.1/assets/esri/themes/light/main.css" />
     <link href="./style.css" rel="stylesheet">
+    <script type="importmap-shim">
+        {
+          "imports": {
+            "esri/": "https://js.arcgis.com/4.19/@arcgis/core/"
+          }
+        }
+      </script>
     <script src="./script.js" type="module-shim" defer></script>
-  
 </head>
+
   <body>
     <!--Main map goes in the *BODY*-->
     <div id="viewDiv"></div>
