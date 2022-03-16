@@ -44,7 +44,7 @@ const elevationProfile = new ElevationProfile({
   view,
   container: "profile",
   profiles: [
-    new ElevationProfileLineInput({ color: [212, 42, 56], title: "Coronet Loop" }),
+    new ElevationProfileLineInput({ color: [212, 42, 56], title: "Paparoa Track" }),
   ],
   visibleElements: {
     selectButton: false,
@@ -87,3 +87,18 @@ const elevationProfile = new ElevationProfile({
   bikeTrackLayer.add(bikeTrack);
   map.add(bikeTrackLayer);
 })();
+
+const inset_map = new EsriMap({
+  basemap: "streets-relief-vector",
+});
+
+new MapView({
+  container: "miniMap",
+  map: inset_map,
+  center: [172.44994752,
+    -42.46085216],
+  zoom: 5,
+  ui: {
+    components: []
+  }
+});
