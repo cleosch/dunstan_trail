@@ -88,7 +88,7 @@ const elevationProfile = new ElevationProfile({
   map.add(bikeTrackLayer);
 })();
 
-const inset_map = new Map({
+const inset_map = new EsriMap({
   basemap: "streets-relief-vector",
 });
 
@@ -102,3 +102,52 @@ new MapView({
     components: []
   }
 });
+
+const viewpoints = {
+  christchurch: {
+    position: [
+      7.66371179,
+      46.50680737,
+      1944.91065
+    ],
+    heading: 153.80,
+    tilt: 66.63
+  },
+  punakaiki: {
+    position: [
+      7.66950766,
+      46.48476542,
+      1570.19567
+    ],
+    heading: 207.12,
+    tilt: 75.00
+  },
+  porarari: {
+    position: [
+      7.65150784,
+      46.45879114,
+      1954.86814
+    ],
+    heading: 219.39,
+    tilt: 77.12
+  },
+  moonlight: {
+    position: [
+      7.63867205,
+      46.44178047,
+      2829.83936
+    ],
+    heading: 221.31,
+    tilt: 66.06
+  }
+}
+
+
+const viewpointBtns = document.getElementsByClassName("viewpointBtn");
+
+for (let i = 0; i < viewpointBtns.length; i++) {
+  const elem = viewpointBtns.item(i);
+  elem.addEventListener("click", function(event) {
+    view.goTo(viewpoints[event.target.dataset.value]);
+  });
+}
