@@ -88,13 +88,13 @@ const elevationProfile = new ElevationProfile({
   map.add(bikeTrackLayer);
 })();
 
-const inset_map = new EsriMap({
+const inset_map = new Map({
   basemap: "streets-relief-vector",
 });
 
 new MapView({
-  container: "miniMap",
   map: inset_map,
+  container: "miniMap",
   center: [172.44994752,
     -42.46085216],
   zoom: 5,
