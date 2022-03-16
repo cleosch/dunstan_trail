@@ -22,12 +22,12 @@ const view = new SceneView({
   qualityProfile: "high",
   camera: {
     position: [
-      168.95148337,
-      -45.02154658,
-      15161.47986
+      171.50188356,
+      -42.24462024,
+      109734.53680
     ],
-    heading: 310.62,
-    tilt: 57.89
+    heading: 358.85,
+    tilt: 0.49
   },
   environment: {
     atmosphere: { quality: "high" },
@@ -42,6 +42,7 @@ const view = new SceneView({
 
 const elevationProfile = new ElevationProfile({
   view,
+  container: "profile",
   profiles: [
     new ElevationProfileLineInput({ color: [212, 42, 56], title: "Coronet Loop" }),
   ],
@@ -51,8 +52,6 @@ const elevationProfile = new ElevationProfile({
     settingsButton: false,
   },
 });
-
-view.ui.add(elevationProfile, "top-right");
 
 (async () => {
   // read the gpx file and convert it to geojson
