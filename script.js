@@ -55,7 +55,7 @@ const elevationProfile = new ElevationProfile({
 
 (async () => {
   // read the gpx file and convert it to geojson
-  const response = await fetch("./cycling.gpx");
+  const response = await fetch("./paparoa.gpx");
   const gpxcontent = await response.text();
   const geojson = gpx(new DOMParser().parseFromString(gpxcontent, "text/xml"));
   const coordinates = geojson.features[0].geometry.coordinates;
