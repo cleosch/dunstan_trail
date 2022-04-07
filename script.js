@@ -2,10 +2,10 @@
 import { gpx } from "https://unpkg.com/@tmcw/togeojson?module";
 
 // Importing ArcGIS API bits and bobs
-import EsriMap from "esri/Map.js";
+import Map from "esri/Map.js";
 import SceneView from "esri/views/SceneView.js";
 
-var map_pls = new ESRIMap({
+var map_pls = new Map({
   basemap: "satellite",
   ground: "world-elevation",
 });
