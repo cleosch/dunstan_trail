@@ -1,7 +1,14 @@
 @import "https://js.arcgis.com/4.19/@arcgis/core/assets/esri/themes/light/main.css";
 
-html,
-body,
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  font-family: "Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif;
+  background: #000;
+}
+
 #map {
   padding: 0;
   margin: 0;
