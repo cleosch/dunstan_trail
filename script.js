@@ -11,13 +11,13 @@ import ElevationProfileLineInput from "esri/widgets/ElevationProfile/ElevationPr
 import Graphic from "esri/Graphic.js";
 import GraphicsLayer from "esri/layers/GraphicsLayer.js";
 
-var map_pls = new Map({
+const map = new Map({
   basemap: "satellite",
   ground: "world-elevation",
 });
  
-var view = new SceneView({
-  map: map_pls,
+const view = new SceneView({
+  map: map,
   container: "map", 
   camera: {
    position: [
