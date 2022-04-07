@@ -28,6 +28,15 @@ var view = new SceneView({
     heading: 304.74,
     tilt: 52.43
   },
+  environment: {
+    atmosphere: { quality: "high" },
+  },
+  ui: {
+    components: ["navigation-toggle"],
+  },
+  popup: {
+    defaultPopupTemplateEnabled: true
+  }
 });
 
 const elevationProfile = new ElevationProfile({
