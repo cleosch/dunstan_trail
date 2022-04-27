@@ -22,12 +22,12 @@ const view = new SceneView({
   qualityProfile: "high",
   camera: {
    position: [
-      168.98609855,
-      -45.01302070,
-      14872.53988
+    169.21082286,
+    -44.96505600,
+    4425.20468
     ],
-    heading: 304.74,
-    tilt: 52.43
+    heading: 174.85,
+    tilt: 74.39
   },
   environment: {
     atmosphere: { quality: "high" },
@@ -43,7 +43,7 @@ const view = new SceneView({
 const elevationProfile = new ElevationProfile({
   view,
   profiles: [
-    new ElevationProfileLineInput({ color: [212, 42, 56], title: "Coronet Loop" }),
+    new ElevationProfileLineInput({ color: [212, 42, 56], title: "Lake Dunstan Trail" }),
   ],
   visibleElements: {
     selectButton: false,
@@ -56,7 +56,7 @@ view.ui.add(elevationProfile, "top-right");
 
 (async () => {
   // read the gpx file and convert it to geojson
-  const response = await fetch("./coronet.gpx");
+  const response = await fetch("./dunstan.gpx");
   const gpxcontent = await response.text();
   const geojson = gpx(new DOMParser().parseFromString(gpxcontent, "text/xml"));
   const coordinates = geojson.features[0].geometry.coordinates;
@@ -96,110 +96,91 @@ function catchAbortError(error) {
   }
 }
   
-document.getElementById("macetown").addEventListener("click", () => {
+document.getElementById("cromwell").addEventListener("click", () => {
   view.goTo({
     position: {
-      x: 168.87633904,
-      y: -44.83948228,
-      z: 5177.04182,
+      x: 169.19430133,
+      y: -45.03236837,
+      z: 1286.55564,
       spatialReference: {
           wkid: 4326
         }
       },
-    heading: 200.35,
-    tilt: 55.19
+    heading: 156.77,
+    tilt: 57.58
   },
   )
   .catch(catchAbortError);
 });
   
-document.getElementById("back").addEventListener("click", () => {
+document.getElementById("bannockburn").addEventListener("click", () => {
   view.goTo({
     position: {
-      x: 168.76724954,
-      y: -44.85663036,
-      z: 6393.75519,
+      x: 169.15415923,
+      y: -45.08907512,
+      z: 692.06038,
       spatialReference: {
         wkid: 4326
         }
       },
-      heading: 146.36,
-      tilt: 43.25
+      heading: 49.1,
+      tilt: 78.81
     },
     )
     .catch(catchAbortError);
   });
   
-document.getElementById("skippers").addEventListener("click", () => {
+document.getElementById("cafe").addEventListener("click", () => {
   view.goTo({
     position: {
-      x: 168.55147406,
-      y: -44.88119739,
-      z: 8133.16600,
+      x: 169.23244220,
+      y: -45.07347919,
+      z: 432.20890,
       spatialReference: {
         wkid: 4326
       }
     },
-    heading: 114.64,
-    tilt: 56.49
+    heading: 172.25,
+    tilt: 76.83
   },
 )
 .catch(catchAbortError);
 });
     
-document.getElementById("coronet").addEventListener("click", () => {
+document.getElementById("towards_clyde").addEventListener("click", () => {
   view
     .goTo(
       {
         position: {
-          x: 168.73441229,
-          y: -44.99226340,
-          z: 5620.77873,
+          x: 169.31309519,
+          y: -45.0850890,
+          z: 1563.11004,
           spatialReference: {
             wkid: 4326
           }
         },
-        heading: 2.07,
-        tilt: 58.51
+        heading: 190.51,
+        tilt: 72.82
       },
     )
     .catch(catchAbortError);
 });
   
   
-document.getElementById("bush_gully").addEventListener("click", () => {
+document.getElementById("clyde").addEventListener("click", () => {
   view
     .goTo(
       {
         position: {
-          x: 168.72293973,
-          y: -44.93566277,
-          z: 2880.32082,
+          x: 169.33953821,
+          y: -45.20766551,
+          z: 984.67280,
           spatialReference: {
             wkid: 4326
           }
         },
-        heading: 84.36,
-        tilt: 65.51
-      },
-    )
-    .catch(catchAbortError);
-});
-  
-document.getElementById("arrowtown").addEventListener("click", () => {
-  view
-    .goTo(
-      {
-        position: {
-          x: 168.84206698,
-          y: -44.96918298,
-          z: 1961.40883,
-          spatialReference: {
-            wkid: 4326
-          }
-        },
-        heading: 341.10,
-        tilt: 67.85
+        heading: 324.25,
+        tilt: 76.82
       },
     )
     .catch(catchAbortError);
