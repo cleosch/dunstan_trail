@@ -27,7 +27,7 @@ html, body {
   color: rgb(100, 100, 100);
   display: block;
   cursor: pointer;
-  margin-left: 15x;
+  margin-left: 15px;
 }
 
 .viewpointBtn button:hover {
