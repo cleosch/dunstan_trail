@@ -43,7 +43,7 @@ const view = new SceneView({
 const elevationProfile = new ElevationProfile({
   view,
   profiles: [
-    new ElevationProfileLineInput({ color: [212, 42, 56], title: "Lake Dunstan Trail" }),
+    new ElevationProfileLineInput({ color: [212, 42, 56], title: "Queenstown Hill Track" }),
   ],
   visibleElements: {
     selectButton: false,
@@ -53,6 +53,8 @@ const elevationProfile = new ElevationProfile({
 });
 
 view.ui.add(elevationProfile, "top-right");
+
+// Bringing in the Dunstan trail //
 
 (async () => {
   // read the gpx file and convert it to geojson
@@ -66,7 +68,7 @@ view.ui.add(elevationProfile, "top-right");
     paths: [coordinates],
     hasZ: true
   });
-  elevationProfile.input = new Graphic({ geometry: geometry });
+  
 
   // add the bike track layer as a graphics layer - like a template
   const bikeTrackLayer = new GraphicsLayer({
@@ -89,6 +91,47 @@ const bikeTrack = new Graphic({
 bikeTrackLayer.add(bikeTrack);
 map.add(bikeTrackLayer);
 })();
+
+// Bringing in the QT Hill fake track //
+
+(async () => {
+  // read the gpx file and convert it to geojson
+  const response = await fetch("./QT_Hill.gpx");
+  const gpxcontent = await response.text();
+  const geojson = gpx(new DOMParser().parseFromString(gpxcontent, "text/xml"));
+  const coordinates = geojson.features[0].geometry.coordinates;
+
+  // add the track as an input for the ElevationProfile widget
+  const geometry = new Polyline({
+    paths: [coordinates],
+    hasZ: true
+  });
+  
+  elevationProfile.input = new Graphic({ geometry: geometry });
+
+  // add the bike track layer as a graphics layer - like a template
+  const QTHill_TrackLayer = new GraphicsLayer({
+    elevationInfo: {
+      mode: "on-the-ground"
+    },
+    listMode: "hide"
+  });
+
+const QTHill_Track = new Graphic({
+  geometry: geometry,
+  symbol: new LineSymbol3D({
+    symbolLayers: [new LineSymbol3DLayer({
+      material: { color: [212, 42, 56] },
+      size: 3
+    })]
+  })
+});
+
+QTHill_TrackLayer.add(QTHill_Track);
+map.add(QTHill_TrackLayer);
+})();
+
+
 
 function catchAbortError(error) {
   if (error.name != "AbortError") {
@@ -181,6 +224,25 @@ document.getElementById("clyde").addEventListener("click", () => {
         },
         heading: 324.25,
         tilt: 76.82
+      },
+    )
+    .catch(catchAbortError);
+});
+
+document.getElementById("qt_hill").addEventListener("click", () => {
+  view
+    .goTo(
+      {
+        position: {
+          x: 168.67864017,
+          y: -45.04865652,
+          z: 1145.61459,
+          spatialReference: {
+            wkid: 4326
+          }
+        },
+        heading: 353.60,
+        tilt: 79.45
       },
     )
     .catch(catchAbortError);
